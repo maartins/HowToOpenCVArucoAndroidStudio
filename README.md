@@ -96,4 +96,4 @@ Credits goes to these links:
  - Execute `cd "../opencv_project/build/"`
  - Execute `mingw32-make` (take a while to finish, mine ~20min)
  - Execute `mingw32-make install`
- - Note: when executing `mingw32-make` if it fails, it will mostly fail at 96%, fortunatly the progress it is "cached" the second time will be faster. When it fails it, please read the error message, it will tell what is missing.
+ - Note: when executing `mingw32-make` if it fails, it will mostly fail at 96%, fortunatly the progress is "cached", the second time the command is executed, it will run faster.
