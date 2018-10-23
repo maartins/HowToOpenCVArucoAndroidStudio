@@ -28,10 +28,11 @@ Credits goes to these links:
    - https://osdn.net/projects/mingw/downloads/68260/mingw-get-setup.exe/
 
 ### Prologue; Initial setup:
-- Install Windows 10, Cmake, Python, Android Studio, MinGW
-- If using MinGW install manager choose: `mingw32-base-bin` and `msys-base-bin`
-- Check if 
-- Add Python to PATH variable in Windows settings, if not done already; Restart PC.
+- Install notes:
+  - If using MinGW install manager choose: `mingw32-base-bin` and `msys-base-bin`
+  - Add JAVA_HOME environment variable pointing to JDK
+  - Add Python to PATH variable in Windows settings
+  - After creating environment variables restart PC.
 - Setup project directory for building and easy access:
   - Create a folder: `../opencv_project`
   - Create a folder: `../opencv_project/opencv`
