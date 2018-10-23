@@ -11,7 +11,7 @@ Credits goes to these links:
    - https://www.microsoft.com/en-us/software-download/windows10
  - Cmake 3.11 or greater
    - https://cmake.org/download/
- - Python 3.2 and 2.7
+ - Python 3.2 preferred
    - https://www.python.org/downloads/
  - latest OpenCV & contrib pack
    - https://github.com/opencv/opencv
@@ -27,7 +27,8 @@ Credits goes to these links:
 
 ### Prologue; Initial setup:
 - Install Windows 10, Cmake, Python, Android Studio, MinGW
-- In MinGW install manager choose: `mingw32-base-bin` and `msys-base-bin`
+- If using MinGW install manager choose: `mingw32-base-bin` and `msys-base-bin`
+- Check if 
 - Add Python to PATH variable in Windows settings, if not done already; Restart PC.
 - Setup project directory for building and easy access:
   - Create a folder: `../opencv_project`
