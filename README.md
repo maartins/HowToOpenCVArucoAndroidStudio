@@ -44,7 +44,7 @@ Credits goes to these links:
   - `../opencv_project/contrib`
   - `../opencv_project/build`
   - `../opencv_project/ndk-r16b`
-  - `../opencv_project/platform`
+  - `../opencv_project/platforms`
   - `../opencv_project/platform-tools`
   - `../opencv_project/tools`
   - `../opencv_project/ant`
@@ -55,16 +55,21 @@ Credits goes to these links:
   - `tools-r25.2.5.zip` into `../opencv_project/tools`
   - `platform-tools-latest-windows.zip` into `../opencv_project/platform-tools`
   - `apache-ant-1.10.5-bin.zip` into `../opencv_project/ant`
+- Download build-tools and a platform:
+  - Open CMD or PowerShell
+  - Navigate to `../opencv_project/tools/bin`
+  - Execute `.\sdkmanager.bat "build-tools;28.0.3"` 
+  - Execute `.\sdkmanager.bat "platforms;android-27"`
+  - Note: you can check out all the packages with `.\sdkmanager.bat --list`; Does not really matter what version is picked
 
 ### 1. step; Cmake gui:
 - Click `Browse Source...` find and add `../opencv_project/opencv`
 - Click `Browse Build...` find and add `.../opencv_project/build`
 - Add the following entries by clicking `Add Entry`:
   - Name: `ANDROID_NDK` Type: `PATH` Value: `../opencv_project/ndk-r16b`
-  - Name: `ANDROID_SDK_TOOLS` Type: `PATH` Value: `../opencv_project/tools`
-  - Name: `ANDROID_NDK_HOST_X64` Type: `Bool` Value: `Ticked`
   - Name: `ANDROID_NATIVE_API_LEVEL` Type: `String` Value: `16`
-  - Name: `ANDROID_SDK_TARGET` Type: `String` Value: `26`
+  - Name: `ANDROID_NDK_HOST_X64` Type: `Bool` Value: `Ticked`
+  - Name: `ANT_EXECUTABLE` Type: `File Path` Value: `../opencv_project/ant/bin/ant.bat`
 - Click `Configure` (assuming its the first configure with this project)
 - In the pop up window:
   - Make sure that `MinGW Makefiles` is the selected generator
