@@ -11,6 +11,8 @@ Credits goes to these links:
    - https://www.microsoft.com/en-us/software-download/windows10
  - Cmake 3.11 or greater
    - https://cmake.org/download/
+ - Java JDK 1.8
+   - https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
  - Python 3.2 preferred
    - https://www.python.org/downloads/
  - latest OpenCV & contrib pack
