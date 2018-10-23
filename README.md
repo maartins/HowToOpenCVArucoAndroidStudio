@@ -61,13 +61,15 @@ Credits goes to these links:
   - Execute `.\sdkmanager.bat "build-tools;28.0.3"` 
   - Execute `.\sdkmanager.bat "platforms;android-27"`
   - Note: you can check out all the packages with `.\sdkmanager.bat --list`; Does not really matter what version is picked
+- NOTE: When `../opencv_project/tools/` is writen, it is meant as full path
 
 ### 1. step; Cmake gui:
 - Click `Browse Source...` find and add `../opencv_project/opencv`
 - Click `Browse Build...` find and add `.../opencv_project/build`
 - Add the following entries by clicking `Add Entry`:
-  - Name: `ANDROID_NDK` Type: `PATH` Value: `../opencv_project/ndk-r16b`
+  - Name: `ANDROID_NDK` Type: `Path` Value: `../opencv_project/ndk-r16b`
   - Name: `ANDROID_NATIVE_API_LEVEL` Type: `String` Value: `16`
+  - Name: `ANDROID_SDK` Type: `Path` Value: `../opencv_project/`
   - Name: `ANDROID_NDK_HOST_X64` Type: `Bool` Value: `Ticked`
   - Name: `ANT_EXECUTABLE` Type: `File Path` Value: `../opencv_project/ant/bin/ant.bat`
 - Click `Configure` (assuming its the first configure with this project)
@@ -76,19 +78,22 @@ Credits goes to these links:
   - Make sure that the `Specify toolchain file for cross-compiling` option is selected
   - Click `Next`; Specify toolchain by cliking `...` find and add `../opencv_project/opencv/platforms/android/android.toolchain.cmake`
   - Click `Finish`
-- click and choose
- - conf -> CMAKE_TOOLCHAIN_FILE file
-- check if not as below then change
- - OPENCV_EXTRA_MODULES_PATH dir (contrib-dir/modules)
+- Every thing is RED! 
+ - Use `Search box` to check for values, if not found, add them:
+ - `ANDROID_SDK_TARGET` Value: the downloaded version (this case `android-27`)
+ - `OPENCV_EXTRA_MODULES_PATH` Value: `../opencv_project/contrib/modules`
  - CMAKE_MAKE_PROGRAM file (mingw-dir/bin/mingw32-make.exe)
- - WITH_CAROTENE 0
- - BUILD_ZLIB 1
-- configure untill no red marks in cmake gui (ignore warnings in output window)
-- generate (ignore warnings in output window)
+ - `WITH_CAROTENE` Value: `Not ticked`
+ - `BUILD_ZLIB` Value: `Ticked`
+- Click `Configure`
+- If some entries are still RED, click `Configure` again
+- Lastly Click `Generate`
 
 ### 2. step; MinGW:
-- go to '../mingw-dir/msys/1.0' and run 'msys' bash file
- - in bash terminal:
- - cd "build"
- - mingw32-make
- - mingw32-make install
+- Navigate to `../MINGW_INSTALL_DIR/msys/1.0`
+- Double click the msys.bat
+- In the new cmd window:
+ - Execute `cd "../opencv_project/build/"`
+ - Execute `mingw32-make` (take a while to finish, mine ~20min)
+ - Execute `mingw32-make install`
+ - Note: when executing `mingw32-make` if it fails, it will mostly fail at 96%, fortunatly the progress it is "cached" the second time will be faster. When it fails it, please read the error message, it will tell what is missing.
