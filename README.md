@@ -29,10 +29,10 @@ Credits goes to these links:
 
 ### Prologue; Initial setup:
 - Install notes:
-  - If using MinGW install manager choose: `mingw32-base-bin` and `msys-base-bin`
-  - Add JAVA_HOME environment variable pointing to JDK
-  - Add Python to PATH variable in Windows settings
-  - After creating environment variables restart PC.
+  - If using MinGW install manager, choose: `mingw32-base-bin` and `msys-base-bin`
+  - Add JAVA_HOME environment variable pointing to JDK installation directory
+  - Add Python installation directory to PATH environment variable
+  - After creating environment variables, restart PC.
 - Setup project directory for building and easy access:
   - Create a folder: `../opencv_project`
   - Create a folder: `../opencv_project/opencv`
