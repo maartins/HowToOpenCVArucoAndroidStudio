@@ -24,8 +24,12 @@ Credits goes to these links:
    - https://dl.google.com/android/repository/android-ndk-r16b-windows-x86_64.zip
  - tools-r25.2.5
    - https://dl.google.com/android/repository/tools_r25.2.5-windows.zip
- - MinGW
+ - platform-tools-latest-windows
+   - https://developer.android.com/studio/releases/platform-tools
+ - latest MinGW
    - https://osdn.net/projects/mingw/downloads/68260/mingw-get-setup.exe/
+ - latest Apache Ant 
+   - https://ant.apache.org/bindownload.cgi
 
 ### Prologue; Initial setup:
 - Install notes:
@@ -34,16 +38,23 @@ Credits goes to these links:
   - Add Python installation directory to PATH environment variable
   - After creating environment variables, restart PC.
 - Setup project directory for building and easy access:
-  - Create a folder: `../opencv_project`
-  - Create a folder: `../opencv_project/opencv`
-  - Create a folder: `../opencv_project/contrib`
-  - Create a folder: `../opencv_project/build`
-  - Create a folder: `../opencv_project/ndk-r16b`
-  - Create a folder: `../opencv_project/tools`
-  - Extract `opencv-master.zip` into `../opencv_project/opencv`
-  - Extract `opencv_contrib-master.zip` into `../opencv_project/contrib`
-  - Extract `android-ndk-r16b-windows-x86_64.zip` into `../opencv_project/ndk-r16b`
-  - Extract `tools-r25.2.5.rar` into `../opencv_project/tools`
+  - Create the following directories: 
+  - `../opencv_project`
+  - `../opencv_project/opencv`
+  - `../opencv_project/contrib`
+  - `../opencv_project/build`
+  - `../opencv_project/ndk-r16b`
+  - `../opencv_project/platform`
+  - `../opencv_project/platform-tools`
+  - `../opencv_project/tools`
+  - `../opencv_project/ant`
+  - Extract the following zip file contents into their folders:
+  - `opencv-master.zip` into `../opencv_project/opencv`
+  - `opencv_contrib-master.zip` into `../opencv_project/contrib`
+  - `android-ndk-r16b-windows-x86_64.zip` into `../opencv_project/ndk-r16b`
+  - `tools-r25.2.5.zip` into `../opencv_project/tools`
+  - `platform-tools-latest-windows.zip` into `../opencv_project/platform-tools`
+  - `apache-ant-1.10.5-bin.zip` into `../opencv_project/ant`
 
 ### 1. step; Cmake gui:
 - Click `Browse Source...` find and add `../opencv_project/opencv`
