@@ -7,29 +7,20 @@ Credits goes to these links:
  - https://jeanvitor.com/cpp-opencv-windonws10-installing/
 
 #### Prerequisites:
- - Windows 10
-   - https://www.microsoft.com/en-us/software-download/windows10
- - Cmake 3.11 or greater
-   - https://cmake.org/download/
- - Java JDK 1.8
-   - https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
- - Python 3.2 preferred
-   - https://www.python.org/downloads/
- - latest OpenCV & contrib pack
-   - https://github.com/opencv/opencv
-   - https://github.com/opencv/opencv_contrib
- - Android Studio 3.1.* (this guide probalby works with any version)
-   - https://developer.android.com/studio/
- - android-ndk-r16b-windows-x86_64
-   - https://dl.google.com/android/repository/android-ndk-r16b-windows-x86_64.zip
- - tools-r25.2.5
-   - https://dl.google.com/android/repository/tools_r25.2.5-windows.zip
- - platform-tools-latest-windows
-   - https://developer.android.com/studio/releases/platform-tools
- - latest MinGW
-   - https://osdn.net/projects/mingw/downloads/68260/mingw-get-setup.exe/
- - latest Apache Ant 
-   - https://ant.apache.org/bindownload.cgi
+ | Item | Link |
+ |------------|-------------------------------------------------------------|
+ | Windows 10 | https://www.microsoft.com/en-us/software-download/windows10 |
+ | Cmake 3.11 or greater | https://cmake.org/download/ |
+ | Java JDK 1.8 | https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html |
+ | Python 3.2 preferred | https://www.python.org/downloads/ |
+ | latest OpenCV source | https://github.com/opencv/opencv |
+ | latest OpenCV contrib source | https://github.com/opencv/opencv_contrib |
+ | leatest Android Studio | https://developer.android.com/studio/ |
+ | android-ndk-r16b-windows-x86_64 | https://dl.google.com/android/repository/android-ndk-r16b-windows-x86_64.zip |
+ | tools-r25.2.5 | https://dl.google.com/android/repository/tools_r25.2.5-windows.zip |
+ | platform-tools-latest-windows | https://developer.android.com/studio/releases/platform-tools |
+ | latest MinGW | https://osdn.net/projects/mingw/downloads/68260/mingw-get-setup.exe/ |
+ | latest Apache Ant | https://ant.apache.org/bindownload.cgi |
 
 ### Prologue; Initial setup:
 - Install notes:
