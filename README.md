@@ -96,4 +96,55 @@ Credits goes to these links:
  - Execute `cd "../opencv_project/build/"`
  - Execute `mingw32-make` (take a while to finish, mine ~20min)
  - Execute `mingw32-make install`
- - Note: when executing `mingw32-make` if it fails, it will mostly fail at 96%, fortunatly the progress is "cached", the second time the command is executed, it will run faster.
+ - Note: In case something was not done correctly `mingw32-make` will fail. If thats the case, it will fail at around 96%, fortunatly the progress is "cached", the second time the command is executed, it will run faster. Surprisingly, the error messages give a decent idea what might be the culprint.
+
+### 3. step; Android Studio:
+- Open Android Studio
+- Create a new project with these parameters:
+  - Select `Include C++ support`
+  - Choose minimum `API 23`
+  - Pick `Empty Activity`
+  - Select C++ standart: `C++11`
+- When its done generating the project:
+  - Open `File-> New-> Import Module...`
+  - As Source directory select `../opencv_project/build/install/sdk/java` (set or remeber a module name)
+  - Click `Next`
+  - Click `Finish`
+- Free to close `import-summary.txt`
+- Switch from `Android` to `Project` view
+- Expand `opencv_module_name` and `app` directory
+- Open `build.gradle` files under previesly expanded directories
+- Compare `opencv_module_name` `build.gradle` file to `app` `build.gradle`:
+  - Check `opencv_module_name` `build.gradle` `compileSdkVersion` is the same as in `app` `build.gradle`
+  - Check `opencv_module_name` `build.gradle` `minSdkVersion` is the same as in `app` `build.gradle`
+  - Check `opencv_module_name` `build.gradle` `targetSdkVersion` is the same as in `app` `build.gradle`
+  - Click `Sync`
+- Check for `jni` directory:
+  - Navigate to `app/src/main`
+  - If `jni` exists skip creating `jni` directory
+- Creating `jni` directory:
+  - Right click `main` directory
+  - Select `New-> Directory`; Name: `jni`
+  - Its color should change to blue, if it does not do the following:
+  - Right click `main` directory
+  - Select `New-> Folder-> JNI Folder`
+  - Select `Change folder Location`
+  - Input `src/main/jni` into `New Folder Location`
+  - Click `Finish`
+- Open `File Explorer` navigate to `../opencv_project/build/install/sdk/native/libs`:
+  - Drag and drop the `armeabi-v7a` directory into `jni`
+  - Click `OK`
+- Open `CMakeList.txt` under `app` directory:
+  - Add the following lines after `add_library(...)` and before `find_library(...)`:
+  - `include_directories("../opencv_project/build/install/sdk/native/jni/include")`
+  - `link_directories("../AndroidStudioProjects/PROJECT_NAME/app/src/main/jniLibs/armeabi-v7a")`
+  - Note: Full path is required here
+  - Add the following lines after `find_library(...)` and before `target_link_libraries(...)`:
+  - `file(GLOB PARTYLIBS "../opencv_project/build/install/sdk/native/3rdparty/libs/armeabi-v7a/*.a")`
+  - `file(GLOB CVLIBS  "../opencv_project/build/install/sdk/native/staticlibs/armeabi-v7a/*.a")`
+  - Note: Full path is required here
+  - Add the following lines inside `target_link_libraries(...)` method:
+  - `${CVLIBS}`
+  - `${PARTYLIBS}`
+  - `${CVLIBS}`
+  
