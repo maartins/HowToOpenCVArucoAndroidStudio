@@ -23,14 +23,14 @@ Credits goes to these links:
  | latest Apache Ant | https://ant.apache.org/bindownload.cgi |
 
 ### Prologue; Initial setup:
-- Install notes:
+- Notes:
   - If using MinGW install manager, choose: `mingw32-base-bin` and `msys-base-bin`
   - Add JAVA_HOME environment variable pointing to JDK installation directory
   - Add Python installation directory to PATH environment variable
   - After creating environment variables, restart PC.
 - Setup project directory for building and easy access:
   - Create the following directories: 
-  - `../opencv_project`
+  - `../opencv_project` (project root directory)
   - `../opencv_project/opencv`
   - `../opencv_project/contrib`
   - `../opencv_project/build`
@@ -91,39 +91,41 @@ Credits goes to these links:
 
 ### 3. step; Android Studio:
 - Open Android Studio
+- Switch from `Android` to `Project` view
+- Note: During this step, Android Studio might ask you to install missing packages, do so
 - Create a new project with these parameters:
   - Select `Include C++ support`
   - Choose minimum `API 23`
   - Pick `Empty Activity`
   - Select C++ standart: `C++11`
-- When its done generating the project:
+- When the it is generated, import the opencv project:
   - Open `File-> New-> Import Module...`
-  - As Source directory select `../opencv_project/build/install/sdk/java` (set or remeber a module name)
+  - As Source directory select `../opencv_project/build/install/sdk/java`
+  - Leave the module name as it is (further in guide `opencv_module_name`)
   - Click `Next`
   - Click `Finish`
-- Free to close `import-summary.txt`
-- Open `File-> Project Structure...`:
+- Remove `uses-sdk` tag from `AndroidManifest.xml` located `opencv_module_name/src/main`
+- Expand `opencv_module_name`, `app` directories and open both `build.gradle` located under them:
+  - Compare `opencv_module_name` `build.gradle` file to `app` `build.gradle`:
+  - Check `opencv_module_name` `build.gradle` `compileSdkVersion` is the same as in `app` `build.gradle`
+  - Check `opencv_module_name` `build.gradle` `minSdkVersion` is the same as in `app` `build.gradle`
+  - Check `opencv_module_name` `build.gradle` `targetSdkVersion` is the same as in `app` `build.gradle`
+  - Click `Sync Now`
+- Add the opencv project as a dependency to the main app:
+  - Open `File-> Project Structure...`:
   - Select `app` from the list
   - Select `Dependecies` tab
   - Click the `+` sign: Select `Module dependecy`
   - Select `opencv_module_name` from the list
   - Click `OK`
   - Click `OK` in Project Structure
-- Switch from `Android` to `Project` view
-- Expand `opencv_module_name` and `app` directory
-- Open `build.gradle` files under previesly expanded directories
-- Compare `opencv_module_name` `build.gradle` file to `app` `build.gradle`:
-  - Check `opencv_module_name` `build.gradle` `compileSdkVersion` is the same as in `app` `build.gradle`
-  - Check `opencv_module_name` `build.gradle` `minSdkVersion` is the same as in `app` `build.gradle`
-  - Check `opencv_module_name` `build.gradle` `targetSdkVersion` is the same as in `app` `build.gradle`
-  - Click `Sync Now`
 - Check for `jni` directory:
   - Navigate to `app/src/main`
   - If `jni` exists skip creating `jni` directory
 - Creating `jni` directory:
   - Right click `main` directory
   - Select `New-> Directory`; Name: `jni`
-  - Its color should change to blue, if it does not do the following:
+  - `jni` directory color should be blue, if it is not, do the following:
   - Right click `main` directory
   - Select `New-> Folder-> JNI Folder`
   - Select `Change folder Location`
@@ -132,31 +134,31 @@ Credits goes to these links:
 - Open `File Explorer` navigate to `../opencv_project/build/install/sdk/native/libs`:
   - Copy the `armeabi-v7a` directory into `jni`
   - Click `OK`
-- Open `CMakeList.txt` under `app` directory:
+- In `app` `build.gradle` add the following line under `cmake{...}`:
+  - `ndk { abiFilter "armeabi-v7a" }`
+  - Click `Sync Now`
+- Linking the libraries, open `CMakeList.txt` under `app` directory:
+  - Note: Full path is required here; Remeber to change `PROJECT_NAME`
   - Add the following lines after `add_library(...)` and before `find_library(...)`:
   - `include_directories("../opencv_project/build/install/sdk/native/jni/include")`
   - `link_directories("../AndroidStudioProjects/PROJECT_NAME/app/src/main/jni/armeabi-v7a")`
-  - Note: Full path is required here; Remeber to change `PROJECT_NAME`
   - Add the following lines after `find_library(...)` and before `target_link_libraries(...)`:
   - `file(GLOB PARTYLIBS "../opencv_project/build/install/sdk/native/3rdparty/libs/armeabi-v7a/*.a")`
   - `file(GLOB CVLIBS  "../opencv_project/build/install/sdk/native/staticlibs/armeabi-v7a/*.a")`
-  - Note: Full path is required here
   - Add the following lines inside `target_link_libraries(...)` method between `native-lib` and `${log-lib}`:
   - `${CVLIBS}`
   - `${PARTYLIBS}`
   - `${CVLIBS}`
   - Click `Sync Now`
-- In the project view, navigate to `app/src/main/cpp`
-- Open `native-lib.cpp`:
+- Check for errors, navigate to `app/src/main/cpp` and open `native-lib.cpp`:
   - Check if writing `#include <opencv2/aruco.hpp>` works; Autocomplete, no errors?
   - Check if writing `cv::Mat test;` works; Autocomplete, no errors?
 - Otherwise, if errors are present, libraries are not linked:
-  - Check `CMakeList.txt`
+  - Check `CMakeList.txt` for misstypes
   - Check if `libopencv_java{number}.so` is under `jni/armeabi-v7a` directory
-  - Check if `../opencv_project/build/install/sdk/native/staticlibs/armeabi-v7a/` contains all the build libs
-- In the project view, navigate to `app/src/main/java/com.example.me.project_name`
-- Open `MainActivity.java`:
-  - Check if writing `import org.opencv.core.Mat` works;
+  - Check if `../opencv_project/build/install/sdk/native/staticlibs/armeabi-v7a/` contains all the build libs `aruco, etc`
+- In the project view, navigate to `app/src/main/java/com.example.me.project_name` and open `MainActivity.java`:
+  - Check if writing `import org.opencv.core.Mat;` works;
 - If no errors:
   - For OpenCV to work when the app is ran
   - add the following line in `MainActivity.java` after `System.loadLibrary("native-lib");`:
