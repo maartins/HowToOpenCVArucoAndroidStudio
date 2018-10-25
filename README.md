@@ -71,12 +71,12 @@ Credits goes to these links:
   - Specify toolchain file location: `../opencv_project/opencv/platforms/android/android.toolchain.cmake`
   - Click `Finish`
 - Every thing is RED! 
- - Use `Search box` to check the following entries, if not found, add them:
- - `ANDROID_SDK_TARGET` Value: `android-27` (the platform version that was downloaded in Prologue)
- - `OPENCV_EXTRA_MODULES_PATH` Value: `../opencv_project/contrib/modules`
- - `CMAKE_MAKE_PROGRAM` Value: `../MINGW_INSTALL_DIR/bin/mingw32-make.exe`
- - `WITH_CAROTENE` Value: `Not ticked`
- - `BUILD_ZLIB` Value: `Ticked`
+- Use `Search box` to check the following entries, if not found, add them:
+  - `ANDROID_SDK_TARGET` Value: `android-27` (the platform version that was downloaded in Prologue)
+  - `OPENCV_EXTRA_MODULES_PATH` Value: `../opencv_project/contrib/modules`
+  - `CMAKE_MAKE_PROGRAM` Value: `../MINGW_INSTALL_DIR/bin/mingw32-make.exe`
+  - `WITH_CAROTENE` Value: `Not ticked`
+  - `BUILD_ZLIB` Value: `Ticked`
 - Click `Configure`
 - If some entries are still RED, click `Configure` again
 - Lastly Click `Generate`
