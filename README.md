@@ -85,10 +85,10 @@ Credits goes to these links:
 - Navigate to `../MINGW_INSTALL_DIR/msys/1.0`
 - Run msys.bat
 - In the CMD window:
- - Execute `cd "../opencv_project/build/"`
- - Execute `mingw32-make` (take a while to finish, mine ~35min)
- - Execute `mingw32-make install`
- - Note: In case something was not done correctly `mingw32-make` will fail. If thats the case, it will fail at around 96%, fortunatly the progress is "cached", the second time the command is executed, it will run faster. Surprisingly, the error messages give a decent idea what might be the culprint.
+  - Execute `cd "../opencv_project/build/"`
+  - Execute `mingw32-make` (take a while to finish, mine ~35min)
+  - Execute `mingw32-make install`
+  - Note: In case something was not done correctly `mingw32-make` will fail. If thats the case, it will fail at around 96%, fortunatly the progress is "cached", the second time the command is executed, it will run faster. Surprisingly, the error messages give a decent idea what might be the culprint.
 
 ### 3. step; Android Studio:
 - Open Android Studio
