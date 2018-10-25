@@ -19,7 +19,7 @@ Credits goes to these links:
  | android-ndk-r16b-windows-x86_64 | https://dl.google.com/android/repository/android-ndk-r16b-windows-x86_64.zip |
  | tools-r25.2.5 | https://dl.google.com/android/repository/tools_r25.2.5-windows.zip |
  | platform-tools-latest-windows | https://developer.android.com/studio/releases/platform-tools |
- | latest MinGW | https://osdn.net/projects/mingw/downloads/68260/mingw-get-setup.exe/ |
+ | latest MinGW | https://osdn.net/projects/mingw/releases/p15522 |
  | latest Apache Ant | https://ant.apache.org/bindownload.cgi |
 
 ### Prologue; Initial setup:
