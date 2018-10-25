@@ -39,22 +39,22 @@ Credits goes to these links:
   - `../opencv_project/platform-tools`
   - `../opencv_project/tools`
   - `../opencv_project/ant`
-  - Extract the following zip file contents into their folders:
+- Extract the following zip file contents into their directories:
   - `opencv-master.zip` into `../opencv_project/opencv`
   - `opencv_contrib-master.zip` into `../opencv_project/contrib`
   - `android-ndk-r16b-windows-x86_64.zip` into `../opencv_project/ndk-r16b`
   - `tools-r25.2.5.zip` into `../opencv_project/tools`
   - `platform-tools-latest-windows.zip` into `../opencv_project/platform-tools`
   - `apache-ant-1.10.5-bin.zip` into `../opencv_project/ant`
-- Download build-tools and a platform:
-  - Open CMD or PowerShell
+- Download build-tools and platform using `sdkmanager.bat`:
+  - Open PowerShell
   - Navigate to `../opencv_project/tools/bin`
   - Execute `.\sdkmanager.bat "build-tools;28.0.3"` 
   - Execute `.\sdkmanager.bat "platforms;android-27"`
-  - Note: you can check out all the packages with `.\sdkmanager.bat --list`; Does not really matter what version is picked
-- NOTE: When `../opencv_project/tools/` is writen, it is meant as full path
+  - Note: To lookup other packages use `.\sdkmanager.bat --list`
 
-### 1. step; Cmake gui:
+### 1. step; Cmake gui; generating the project:
+- Open Cmake gui
 - Click `Browse Source...` find and add `../opencv_project/opencv`
 - Click `Browse Build...` find and add `.../opencv_project/build`
 - Add the following entries by clicking `Add Entry`:
@@ -63,29 +63,30 @@ Credits goes to these links:
   - Name: `ANDROID_SDK` Type: `Path` Value: `../opencv_project/`
   - Name: `ANDROID_NDK_HOST_X64` Type: `Bool` Value: `Ticked`
   - Name: `ANT_EXECUTABLE` Type: `File Path` Value: `../opencv_project/ant/bin/ant.bat`
-- Click `Configure` (assuming its the first configure with this project)
-- In the pop up window:
-  - Make sure that `MinGW Makefiles` is the selected generator
-  - Make sure that the `Specify toolchain file for cross-compiling` option is selected
-  - Click `Next`; Specify toolchain by cliking `...` find and add `../opencv_project/opencv/platforms/android/android.toolchain.cmake`
+- Click `Configure`
+- A window will pop up, make sure the following values are selected:
+  - `MinGW Makefiles` as selected generator
+  - `Specify toolchain file for cross-compiling` option is selected
+  - Click `Next`
+  - Specify toolchain file location: `../opencv_project/opencv/platforms/android/android.toolchain.cmake`
   - Click `Finish`
 - Every thing is RED! 
- - Use `Search box` to check for values, if not found, add them:
- - `ANDROID_SDK_TARGET` Value: the downloaded version (this case `android-27`)
+ - Use `Search box` to check the following entries, if not found, add them:
+ - `ANDROID_SDK_TARGET` Value: `android-27` (the platform version that was downloaded in Prologue)
  - `OPENCV_EXTRA_MODULES_PATH` Value: `../opencv_project/contrib/modules`
- - CMAKE_MAKE_PROGRAM file (mingw-dir/bin/mingw32-make.exe)
+ - `CMAKE_MAKE_PROGRAM` Value: `../MINGW_INSTALL_DIR/bin/mingw32-make.exe`
  - `WITH_CAROTENE` Value: `Not ticked`
  - `BUILD_ZLIB` Value: `Ticked`
 - Click `Configure`
 - If some entries are still RED, click `Configure` again
 - Lastly Click `Generate`
 
-### 2. step; MinGW:
+### 2. step; MinGW; compiling the project:
 - Navigate to `../MINGW_INSTALL_DIR/msys/1.0`
-- Double click the msys.bat
-- In the new cmd window:
+- Run msys.bat
+- In the CMD window:
  - Execute `cd "../opencv_project/build/"`
- - Execute `mingw32-make` (take a while to finish, mine ~20min)
+ - Execute `mingw32-make` (take a while to finish, mine ~35min)
  - Execute `mingw32-make install`
  - Note: In case something was not done correctly `mingw32-make` will fail. If thats the case, it will fail at around 96%, fortunatly the progress is "cached", the second time the command is executed, it will run faster. Surprisingly, the error messages give a decent idea what might be the culprint.
 
