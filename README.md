@@ -12,10 +12,10 @@ Credits goes to these links:
  | Windows 10 | https://www.microsoft.com/en-us/software-download/windows10 |
  | Cmake 3.11 or greater | https://cmake.org/download/ |
  | Java JDK 1.8 | https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html |
- | Python 3.2 preferred | https://www.python.org/downloads/ |
+ | Python 3.* preferred | https://www.python.org/downloads/ |
  | latest OpenCV source | https://github.com/opencv/opencv |
  | latest OpenCV contrib source | https://github.com/opencv/opencv_contrib |
- | leatest Android Studio | https://developer.android.com/studio/ |
+ | latest Android Studio | https://developer.android.com/studio/ |
  | android-ndk-r16b-windows-x86_64 | https://dl.google.com/android/repository/android-ndk-r16b-windows-x86_64.zip |
  | tools-r25.2.5 | https://dl.google.com/android/repository/tools_r25.2.5-windows.zip |
  | platform-tools-latest-windows | https://developer.android.com/studio/releases/platform-tools |
@@ -86,9 +86,8 @@ Credits goes to these links:
 - Run msys.bat
 - In the CMD window:
   - Execute `cd "../opencv_project/build/"`
-  - Execute `mingw32-make` (take a while to finish, mine ~35min)
+  - Execute `mingw32-make` (takes a while to finish, mine ~40min)
   - Execute `mingw32-make install`
-  - Note: In case something was not done correctly `mingw32-make` will fail. If thats the case, it will fail at around 96%, fortunatly the progress is "cached", the second time the command is executed, it will run faster. Surprisingly, the error messages give a decent idea what might be the culprint.
 
 ### 3. step; Android Studio:
 - Open Android Studio
