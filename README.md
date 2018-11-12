@@ -134,7 +134,7 @@ Credits goes to these links:
 - Open `File Explorer` navigate to `../opencv_project/build/install/sdk/native/libs`:
   - Copy the `armeabi-v7a` directory into `jni`
   - Click `OK`
-- In `app` `build.gradle` add the following line under `cmake{...}`:
+- In `app` `build.gradle` file add the following line after `cmake{...}`:
   - `ndk { abiFilter "armeabi-v7a" }`
   - Click `Sync Now`
 - Linking the libraries, open `CMakeList.txt` under `app` directory:
