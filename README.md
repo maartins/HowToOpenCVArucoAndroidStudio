@@ -86,7 +86,7 @@ Credits goes to these links:
 - Run msys.bat
 - In the CMD window:
   - Execute `cd "../opencv_project/build/"`
-  - Execute `mingw32-make` (takes a while to finish, mine ~40min)
+  - Execute `mingw32-make` (takes a while to finish ~40min)
   - Execute `mingw32-make install`
 
 ### 3. step; Android Studio:
