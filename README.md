@@ -91,13 +91,13 @@ Credits goes to these links:
 
 ### 3. step; Android Studio:
 - Open Android Studio
-- Switch from `Android` to `Project` view
-- Note: During this step, Android Studio might ask you to install missing packages, do so
 - Create a new project with these parameters:
   - Select `Include C++ support`
   - Choose minimum `API 23`
   - Pick `Empty Activity`
   - Select C++ standart: `C++11`
+- Note: During the following steps, Android Studio might ask you to install missing packages, do so
+- Switch from `Android` to `Project` view
 - When the it is generated, import the opencv project:
   - Open `File-> New-> Import Module...`
   - As Source directory select `../opencv_project/build/install/sdk/java`
