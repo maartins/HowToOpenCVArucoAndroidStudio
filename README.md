@@ -18,7 +18,6 @@ Credits goes to these links:
  | latest Android Studio | https://developer.android.com/studio/ |
  | android-ndk-r16b-windows-x86_64 | https://dl.google.com/android/repository/android-ndk-r16b-windows-x86_64.zip |
  | tools-r25.2.5 | https://dl.google.com/android/repository/tools_r25.2.5-windows.zip |
- | platform-tools-latest-windows | https://developer.android.com/studio/releases/platform-tools |
  | latest MinGW | https://osdn.net/projects/mingw/releases/p15522 |
  | latest Apache Ant | https://ant.apache.org/bindownload.cgi |
 
@@ -44,14 +43,14 @@ Credits goes to these links:
   - `opencv_contrib-master.zip` into `../opencv_project/contrib`
   - `android-ndk-r16b-windows-x86_64.zip` into `../opencv_project/ndk-r16b`
   - `tools-r25.2.5.zip` into `../opencv_project/tools`
-  - `platform-tools-latest-windows.zip` into `../opencv_project/platform-tools`
   - `apache-ant-1.10.5-bin.zip` into `../opencv_project/ant`
 - Download build-tools and platform using `sdkmanager.bat`:
   - Open PowerShell
   - Navigate to `../opencv_project/tools/bin`
   - Execute `.\sdkmanager.bat "build-tools;28.0.3"` 
   - Execute `.\sdkmanager.bat "platforms;android-27"`
-  - Note: To lookup other packages use `.\sdkmanager.bat --list`
+  - Execute `.\sdkmanager.bat "platform-tools"`
+  - Note: To lookup package names use `.\sdkmanager.bat --list`
 
 ### 1. step; Cmake gui; generating the project:
 - Open Cmake gui
@@ -98,6 +97,11 @@ Credits goes to these links:
   - Select C++ standart: `C++11`
 - Note: During the following steps, Android Studio might ask you to install missing packages, do so
 - Switch from `Android` to `Project` view
+- Make Android Studio use the old ndk:
+  - Click `File-> Project Structure...`
+  - Select `SDK Location`
+  - Set the `Android NDK location` as `../opencv_project/ndk-r16b`
+  - Click `OK`
 - Import the compiled opencv project as a module:
   - Open `File-> New-> Import Module...`
   - As Source directory select `../opencv_project/build/install/sdk/java`
@@ -132,7 +136,7 @@ Credits goes to these links:
   - Input `src/main/jni` into `New Folder Location`
   - Click `Finish`
 - Open `File Explorer` navigate to `../opencv_project/build/install/sdk/native/libs`:
-  - Copy the `armeabi-v7a` directory into `jni`
+  - Copy the `armeabi-v7a` directory into `app/src/main/jni`
   - Click `OK`
 - In `app` `build.gradle` file add the following line after `cmake{...}`:
   - `ndk { abiFilter "armeabi-v7a" }`
