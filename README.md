@@ -105,47 +105,42 @@ Credits goes to these links:
 - Import the compiled opencv project as a module:
   - Open `File-> New-> Import Module...`
   - As Source directory select `../opencv_project/build/install/sdk/java`
-  - Leave the module name as it is (further in guide `opencv_module_name`)
+  - Leave the module name as it is (further in this guide `OPENCV_MOD`)
   - Click `Next`
   - Click `Finish`
-- Remove `uses-sdk` tag from `AndroidManifest.xml` located `opencv_module_name/src/main`
-- Expand `opencv_module_name`, `app` directories and open both `build.gradle` located under them:
-  - Compare `opencv_module_name` `build.gradle` file to `app` `build.gradle`:
-  - Check `opencv_module_name` `build.gradle` `compileSdkVersion` is the same as in `app` `build.gradle`
-  - Check `opencv_module_name` `build.gradle` `minSdkVersion` is the same as in `app` `build.gradle`
-  - Check `opencv_module_name` `build.gradle` `targetSdkVersion` is the same as in `app` `build.gradle`
-  - Click `Sync Now`
-- Add the opencv project as a dependency to the main app:
+- Remove `uses-sdk` tag from `AndroidManifest.xml` located in `opencv_module_name/src/main`
+- Add `OPENCV_MOD` as a dependency to the main app:
   - Open `File-> Project Structure...`:
   - Select `app` from the list
   - Select `Dependecies` tab
   - Click the `+` sign: Select `Module dependecy`
-  - Select `opencv_module_name` from the list
+  - Select `OPENCV_MOD` from the list
   - Click `OK`
   - Click `OK` in Project Structure
-- Check for `jni` directory:
-  - Navigate to `app/src/main`
-  - If `jni` exists skip creating `jni` directory
-- Creating `jni` directory:
-  - Right click `main` directory
-  - Select `New-> Directory`; Name: `jni`
-  - `jni` directory color should be blue, if it is not, do the following:
+-  Set the following values in `OPENCV_MOD/build.gradle` to the same values as in `app/build.gradle`:
+  - Expand `OPENCV_MOD` and `app` directories in project view and open both `build.gradle`
+  - Check `compileSdkVersion` is the same
+  - Check `minSdkVersion` is the same
+  - Check `targetSdkVersion` is the same
+  - Click `Sync Now`
+- Creating `jniLibs` directory:
+  - Expand `app/src/main`
   - Right click `main` directory
   - Select `New-> Folder-> JNI Folder`
   - Select `Change folder Location`
-  - Input `src/main/jni` into `New Folder Location`
+  - Input `src/main/jniLibs` into `New Folder Location`
   - Click `Finish`
 - Open `File Explorer` navigate to `../opencv_project/build/install/sdk/native/libs`:
-  - Copy the `armeabi-v7a` directory into `app/src/main/jni`
+  - Copy the `armeabi-v7a` directory into `app/src/main/jniLibs`
   - Click `OK`
-- In `app` `build.gradle` file add the following line after `cmake{...}`:
+- Add the following line in `app/build.gradle` file, inside `externalNativeBuild{...}` block:
   - `ndk { abiFilter "armeabi-v7a" }`
   - Click `Sync Now`
-- Linking the libraries, open `CMakeList.txt` under `app` directory:
-  - Note: Full path is required here; Remeber to change `PROJECT_NAME`
+- Linking the libraries, open `app/CMakeList.txt`:
+  - Note: Full path is required here; Remember to change `PROJECT_NAME`
   - Add the following lines after `add_library(...)` and before `find_library(...)`:
   - `include_directories("../opencv_project/build/install/sdk/native/jni/include")`
-  - `link_directories("../AndroidStudioProjects/PROJECT_NAME/app/src/main/jni/armeabi-v7a")`
+  - `link_directories("../AndroidStudioProjects/PROJECT_NAME/app/src/main/jniLibs/armeabi-v7a")`
   - Add the following lines after `find_library(...)` and before `target_link_libraries(...)`:
   - `file(GLOB PARTYLIBS "../opencv_project/build/install/sdk/native/3rdparty/libs/armeabi-v7a/*.a")`
   - `file(GLOB CVLIBS  "../opencv_project/build/install/sdk/native/staticlibs/armeabi-v7a/*.a")`
@@ -154,18 +149,31 @@ Credits goes to these links:
   - `${PARTYLIBS}`
   - `${CVLIBS}`
   - Click `Sync Now`
-- Check for errors, navigate to `app/src/main/cpp` and open `native-lib.cpp`:
-  - Check if writing `#include <opencv2/aruco.hpp>` works; Autocomplete, no errors?
-  - Check if writing `cv::Mat test;` works; Autocomplete, no errors?
-- Otherwise, if errors are present, libraries are not linked:
-  - Check `CMakeList.txt` for misstypes
-  - Check if `libopencv_java{number}.so` is under `jni/armeabi-v7a` directory
-  - Check if `../opencv_project/build/install/sdk/native/staticlibs/armeabi-v7a/` contains all the build libs `aruco, etc`
-- In the project view, navigate to `app/src/main/java/com.example.me.project_name` and open `MainActivity.java`:
-  - Check if writing `import org.opencv.core.Mat;` works;
-- If no errors:
-  - For OpenCV to work when the app is ran
-  - add the following line in `MainActivity.java` after `System.loadLibrary("native-lib");`:
-  - `System.loadLibrary("opencv_java4");`
-- Note: `opencv_java4` the number depends on the version of opencv source
+
+### Epilogue; Make sure it works:
+- C++
+- Navigate to `app/src/main/cpp` and open `native-lib.cpp`:
+  - Add `#include <opencv2/aruco.hpp>`
+  - Replace the contents of `stringFromJNI` function with:
+  - `std::string hello = "Hello from C++";`
+  - `cv::Mat test;`
+  - `hello += " test";`
+  - `return env->NewStringUTF(hello.c_str());`
+- If errors are present, high chance that the libraries are not linked:
+  - Check `CMakeList.txt` for typos
+  - In project view, check if `libopencv_java{number}.so` is under `jniLibs/armeabi-v7a` directory
+  - In explorer, check if `../opencv_project/build/install/sdk/native/staticlibs/armeabi-v7a/` contains all the built libs `aruco, etc`
+- Java
+- Navigate to `app/src/main/java/com.example.me.PROJECT_NAME` and open `MainActivity.java`:
+  - Add `import org.opencv.core.Mat;`
+  - Add `System.loadLibrary("opencv_java4");` after `System.loadLibrary("native-lib");`
+  - Replace the contents of `onCreate` method with:
+  - `super.onCreate(savedInstanceState);`
+  - `setContentView(R.layout.activity_main);`
+  - `Mat test = new Mat();`
+  - `TextView tv = (TextView) findViewById(R.id.sample_text);`
+  - `tv.setText(stringFromJNI() + " " + test.depth());`
+- If errors are present:
+  - Check if `OPENCV_MOD` is set as a dependency
+  - Check if the `jniLibs` folder is used instead of `jni`
   
