@@ -34,8 +34,6 @@ Credits goes to these links:
   - `../opencv_project/contrib`
   - `../opencv_project/build`
   - `../opencv_project/ndk-r16b`
-  - `../opencv_project/platforms`
-  - `../opencv_project/platform-tools`
   - `../opencv_project/tools`
   - `../opencv_project/ant`
 - Extract the following zip file contents into their directories:
