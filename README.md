@@ -15,7 +15,7 @@ Credits goes to these links:
  | Python 3.* preferred | https://www.python.org/downloads/ |
  | latest OpenCV source | https://github.com/opencv/opencv |
  | latest OpenCV contrib source | https://github.com/opencv/opencv_contrib |
- | latest Android Studio | https://developer.android.com/studio/ |
+ | Android Studio 3.2 | https://developer.android.com/studio/ |
  | android-ndk-r16b-windows-x86_64 | https://dl.google.com/android/repository/android-ndk-r16b-windows-x86_64.zip |
  | tools-r25.2.5 | https://dl.google.com/android/repository/tools_r25.2.5-windows.zip |
  | latest MinGW | https://osdn.net/projects/mingw/releases/p15522 |
