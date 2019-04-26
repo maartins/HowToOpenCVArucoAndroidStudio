@@ -6,20 +6,23 @@ Credits goes to these links:
  - https://stackoverflow.com/questions/26016770/how-to-install-old-version-of-android-build-tools-from-command-line
  - https://jeanvitor.com/cpp-opencv-windonws10-installing/
 
+Tested on Windows 10 and MX Linux 18.2
+
 #### Prerequisites:
  | Item | Link |
  |------------|-------------------------------------------------------------|
- | Windows 10 | https://www.microsoft.com/en-us/software-download/windows10 |
  | Cmake 3.11 or greater | https://cmake.org/download/ |
  | Java JDK 1.8 | https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html |
  | Python 3.* preferred | https://www.python.org/downloads/ |
  | latest OpenCV source | https://github.com/opencv/opencv |
  | latest OpenCV contrib source | https://github.com/opencv/opencv_contrib |
  | Android Studio 3.2 | https://developer.android.com/studio/ |
- | android-ndk-r16b-windows-x86_64 | https://dl.google.com/android/repository/android-ndk-r16b-windows-x86_64.zip |
- | tools-r25.2.5 | https://dl.google.com/android/repository/tools_r25.2.5-windows.zip |
- | latest MinGW | https://osdn.net/projects/mingw/releases/p15522 |
+ | android-ndk-r16b-windows-x86_64 | Windows: https://dl.google.com/android/repository/android-ndk-r16b-windows-x86_64.zip Linux: https://dl.google.com/android/repository/android-ndk-r16b-linux-x86_64.zip |
+ | tools-r25.2.5 | Windows: https://dl.google.com/android/repository/tools_r25.2.5-windows.zip Linux: https://dl.google.com/android/repository/tools_r25.2.5-linux.zip |
+ | Build tools| Windows: https://osdn.net/projects/mingw/releases/p15522 Linux: gcc, build-essential |
  | latest Apache Ant | https://ant.apache.org/bindownload.cgi |
+ 
+ - Notes: For Linux users, check out your package manager for aviable applications
 
 ### Prologue; Initial setup:
 - Notes:
@@ -42,13 +45,13 @@ Credits goes to these links:
   - `android-ndk-r16b-windows-x86_64.zip` into `../opencv_project/ndk-r16b`
   - `tools-r25.2.5.zip` into `../opencv_project/tools`
   - `apache-ant-1.10.5-bin.zip` into `../opencv_project/ant`
-- Download build-tools and platform using `sdkmanager.bat`:
-  - Open PowerShell
+- Download build-tools and platform using Windows: `sdkmanager.bat` or Linux: `sdkmanager`:
+  - Open PowerShell or Terminal
   - Navigate to `../opencv_project/tools/bin`
-  - Execute `.\sdkmanager.bat "build-tools;28.0.3"` 
-  - Execute `.\sdkmanager.bat "platforms;android-27"`
-  - Execute `.\sdkmanager.bat "platform-tools"`
-  - Note: To lookup package names use `.\sdkmanager.bat --list`
+  - Execute Windows: `.\sdkmanager.bat "build-tools;28.0.3"` or Linux: `./sdkmanager "build-tools;28.0.3"`
+  - Execute Windows: `.\sdkmanager.bat "platforms;android-27"` or Linux: `./sdkmanager "platforms;android-27"`
+  - Execute Windows: `.\sdkmanager.bat "platform-tools"` or Linux: `./sdkmanager "platform-tools"`
+  - Note: To lookup package names use Windows: `.\sdkmanager.bat --list` or Linux: `./sdkmanager --list`
 
 ### 1. step; Cmake gui; generating the project:
 - Open Cmake gui
@@ -59,10 +62,10 @@ Credits goes to these links:
   - Name: `ANDROID_NATIVE_API_LEVEL` Type: `String` Value: `16`
   - Name: `ANDROID_SDK` Type: `Path` Value: `../opencv_project/`
   - Name: `ANDROID_NDK_HOST_X64` Type: `Bool` Value: `Ticked`
-  - Name: `ANT_EXECUTABLE` Type: `File Path` Value: `../opencv_project/ant/bin/ant.bat`
+  - Name: `ANT_EXECUTABLE` Type: `File Path` Value: Windows: `../opencv_project/ant/bin/ant.bat` or Linux: `../opencv_project/ant/bin/ant`
 - Click `Configure`
 - A window will pop up, make sure the following values are selected:
-  - `MinGW Makefiles` as selected generator
+  - Windows: `MinGW Makefiles` or Linux: `Unix Makefiles` as selected generator
   - `Specify toolchain file for cross-compiling` option is selected
   - Click `Next`
   - Specify toolchain file location: `../opencv_project/opencv/platforms/android/android.toolchain.cmake`
@@ -71,21 +74,25 @@ Credits goes to these links:
 - Use `Search box` to check the following entries, if not found, add them:
   - `ANDROID_SDK_TARGET` Value: `android-27` (the platform version that was downloaded in Prologue)
   - `OPENCV_EXTRA_MODULES_PATH` Value: `../opencv_project/contrib/modules`
-  - `CMAKE_MAKE_PROGRAM` Value: `../MINGW_INSTALL_DIR/bin/mingw32-make.exe`
+  - For Windows only: `CMAKE_MAKE_PROGRAM` Value: `../MINGW_INSTALL_DIR/bin/mingw32-make.exe`
   - `WITH_CAROTENE` Value: `Not ticked`
   - `BUILD_ZLIB` Value: `Ticked`
 - Click `Configure`
 - If some entries are still RED, click `Configure` again
 - Lastly Click `Generate`
 
-### 2. step; MinGW; compiling the project:
-- Navigate to `../MINGW_INSTALL_DIR/msys/1.0`
-- Run msys.bat
-- In the CMD window:
+### 2. step; Compiling the project:
+- For Windows: 
+  - Navigate to `../MINGW_INSTALL_DIR/msys/1.0`
+  - Run msys.bat
+  - In the CMD window:
+    - Execute `cd "../opencv_project/build/"`
+    - Execute `mingw32-make` (takes a while to finish ~40min)
+    - Execute `mingw32-make install`
+- For Linux:
   - Execute `cd "../opencv_project/build/"`
-  - Execute `mingw32-make` (takes a while to finish ~40min)
-  - Execute `mingw32-make install`
-
+  - Execute `make` (takes a while to finish ~40min)
+  - Execute `make install`
 ### 3. step; Android Studio:
 - Open Android Studio
 - Create a new project with these parameters:
