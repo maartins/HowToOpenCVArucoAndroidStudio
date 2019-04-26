@@ -22,7 +22,7 @@ Tested on Windows 10 and MX Linux 18.2
  | Build tools| Windows: https://osdn.net/projects/mingw/releases/p15522 Linux: gcc, build-essential |
  | latest Apache Ant | https://ant.apache.org/bindownload.cgi |
  
- - Notes: For Linux users, check out your package manager for aviable applications
+ - Notes: For Linux users, check out your package manager for available applications
 
 ### Prologue; Initial setup:
 - Notes:
