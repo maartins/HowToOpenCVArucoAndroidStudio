@@ -12,7 +12,7 @@ Tested on Windows 10 and MX Linux 18.2
  | Item | Link |
  |------------|-------------------------------------------------------------|
  | Cmake 3.11 or greater | https://cmake.org/download/ |
- | Java JDK 1.8 | https://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html |
+ | Java JDK 1.8 | https://adoptopenjdk.net/?variant=openjdk8&jvmVariant=hotspot |
  | Python 3.* preferred | https://www.python.org/downloads/ |
  | latest OpenCV source | https://github.com/opencv/opencv |
  | latest OpenCV contrib source | https://github.com/opencv/opencv_contrib |
